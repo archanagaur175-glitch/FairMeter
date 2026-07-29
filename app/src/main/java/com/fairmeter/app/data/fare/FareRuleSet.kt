@@ -3,7 +3,7 @@ package com.fairmeter.app.data.fare
 import com.fairmeter.app.data.model.City
 import java.time.LocalTime
 
-sealed interface FareRuleSet {
+interface FareRuleSet {
     val city: City
     val effectiveDate: String
     val lastVerified: String

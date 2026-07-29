@@ -35,9 +35,11 @@ import com.fairmeter.app.ui.components.CityPicker
 import com.fairmeter.app.ui.theme.AmberGradientEnd
 import com.fairmeter.app.ui.theme.AmberGradientStart
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 
 @Composable
@@ -96,34 +98,38 @@ fun PreTripScreen(
                             controller.setZoom(12.0)
                             controller.setCenter(GeoPoint(12.97, 77.59))
 
-                            setOnLongClickListener { _, p ->
-                                if (sourceMarker == null) {
-                                    sourceMarker = Marker(this).apply {
-                                        position = p
-                                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                                        title = "Source"
-                                        snippet = "${p.latitude}, ${p.longitude}"
-                                        icon = ctx.getDrawable(
-                                            android.R.drawable.ic_menu_mylocation
-                                        )
+                            val eventsOverlay = MapEventsOverlay(object : MapEventsReceiver {
+                                override fun singleTapConfirmedHelper(p: GeoPoint): Boolean = false
+                                override fun longPressHelper(p: GeoPoint): Boolean {
+                                    if (sourceMarker == null) {
+                                        sourceMarker = Marker(this).apply {
+                                            position = p
+                                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                                            title = "Source"
+                                            snippet = "${p.latitude}, ${p.longitude}"
+                                            icon = ctx.getDrawable(
+                                                android.R.drawable.ic_menu_mylocation
+                                            )
+                                        }
+                                        overlays.add(sourceMarker)
+                                        viewModel.setSource(p.latitude, p.longitude)
+                                    } else if (destMarker == null) {
+                                        destMarker = Marker(this).apply {
+                                            position = p
+                                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                                            title = "Destination"
+                                            snippet = "${p.latitude}, ${p.longitude}"
+                                            icon = ctx.getDrawable(
+                                                android.R.drawable.ic_menu_directions
+                                            )
+                                        }
+                                        overlays.add(destMarker)
+                                        viewModel.setDestination(p.latitude, p.longitude)
                                     }
-                                    addOverlay(sourceMarker)
-                                    viewModel.setSource(p.latitude, p.longitude)
-                                } else if (destMarker == null) {
-                                    destMarker = Marker(this).apply {
-                                        position = p
-                                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                                        title = "Destination"
-                                        snippet = "${p.latitude}, ${p.longitude}"
-                                        icon = ctx.getDrawable(
-                                            android.R.drawable.ic_menu_directions
-                                        )
-                                    }
-                                    addOverlay(destMarker)
-                                    viewModel.setDestination(p.latitude, p.longitude)
+                                    return true
                                 }
-                                true
-                            }
+                            })
+                            overlays.add(eventsOverlay)
                         }
                     },
                     modifier = Modifier.fillMaxSize()

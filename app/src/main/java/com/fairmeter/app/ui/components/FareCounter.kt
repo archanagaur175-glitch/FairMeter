@@ -1,7 +1,8 @@
 package com.fairmeter.app.ui.components
 
-import androidx.compose.animation.animateFloatAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.getValue
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +28,7 @@ fun FareCounter(
     fare: Int,
     modifier: Modifier = Modifier
 ) {
-    val animatedFare by animateFloatAsState(
+    val animatedFare: Float by animateFloatAsState(
         targetValue = fare.toFloat(),
         animationSpec = tween(durationMillis = 500),
         label = "fare"

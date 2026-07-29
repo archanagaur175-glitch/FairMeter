@@ -8,6 +8,7 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -74,27 +75,25 @@ fun IncidentScreen(
         ) {
             AndroidView(
                 factory = { ctx ->
-                    val provider = ProcessCameraProvider.getInstance(ctx)
-                    provider.addListener({
-                        val cameraProvider = provider.get()
-                        val preview = Preview.Builder().build()
-                        val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-                        val previewView = androidx.camera.view.PreviewView(ctx)
-                        preview.setSurfaceProvider(previewView.surfaceProvider)
-
-                        try {
-                            cameraProvider.unbindAll()
-                            cameraProvider.bindToLifecycle(
-                                lifecycleOwner,
-                                cameraSelector,
-                                preview,
-                                imageCapture
-                            )
-                        } catch (_: Exception) {}
-
-                        previewView
-                    }, ContextCompat.getMainExecutor(ctx))
+                    PreviewView(ctx).also { previewView ->
+                        val cameraFuture = ProcessCameraProvider.getInstance(ctx)
+                        cameraFuture.addListener({
+                            val cameraProvider = cameraFuture.get()
+                            val preview = Preview.Builder().build().also {
+                                it.setSurfaceProvider(previewView.surfaceProvider)
+                            }
+                            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                            try {
+                                cameraProvider.unbindAll()
+                                cameraProvider.bindToLifecycle(
+                                    lifecycleOwner,
+                                    cameraSelector,
+                                    preview,
+                                    imageCapture
+                                )
+                            } catch (_: Exception) {}
+                        }, ContextCompat.getMainExecutor(ctx))
+                    }
                 },
                 modifier = Modifier.fillMaxSize()
             )
