@@ -88,7 +88,7 @@ fun FairMeterNavHost(
                 },
                 onTripEnded = {
                     // Navigate to summary after trip ends
-                    navController.navigate("summary/0/0/0/0/0.0/0/${city.name}/0/0") {
+                    navController.navigate("summary/0/0/0/0/0/0.0/0/${city.name}/0/0") {
                         popUpTo(Routes.SPLASH)
                     }
                 }
