@@ -1,6 +1,10 @@
 package com.fairmeter.app.ui.preTrip
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.compose.ui.viewinterop.AndroidView
 import com.fairmeter.app.data.model.City
 import com.fairmeter.app.ui.components.CityPicker
@@ -55,6 +60,22 @@ fun PreTripScreen(
     var mapView by remember { mutableStateOf<MapView?>(null) }
     var sourceMarker by remember { mutableStateOf<Marker?>(null) }
     var destMarker by remember { mutableStateOf<Marker?>(null) }
+
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { perms ->
+        if (perms[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
+            state.sourceLat?.let { slat ->
+                state.sourceLng?.let { slng ->
+                    state.destLat?.let { dlat ->
+                        state.destLng?.let { dlng ->
+                            onStartTrip(state.selectedCity, slat, slng, dlat, dlng)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     DisposableEffect(context) {
         Configuration.getInstance().userAgentValue = "FairMeter/1.0"
@@ -182,6 +203,18 @@ fun PreTripScreen(
 
             Button(
                 onClick = {
+                    val fineGranted = ContextCompat.checkSelfPermission(
+                        context, Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                    if (!fineGranted) {
+                        locationPermissionLauncher.launch(
+                            arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                            )
+                        )
+                        return@Button
+                    }
                     state.sourceLat?.let { slat ->
                         state.sourceLng?.let { slng ->
                             state.destLat?.let { dlat ->
