@@ -210,10 +210,8 @@ class FareCalculatorTest {
         assertEquals(25, result.baseFare)
         assertEquals(0, result.waitingFare)
         assertEquals(0, result.nightSurcharge)
-        if (result.total != 49) throw RuntimeException("DEBUG total=" + result.total + " dist=" + result.distanceFare + " base=" + result.baseFare)
-        if (result.distanceFare != 24) throw RuntimeException("DEBUG2 dist=" + result.distanceFare)
-        assertEquals(49, result.total)
-        assertEquals(24, result.distanceFare)
+        val rules = FareCalculator.getRules(com.fairmeter.app.data.model.City.CHENNAI)
+        throw RuntimeException("DEBUG perKm=" + rules.perKmRate() + " minDist=" + rules.minDistanceKm() + " beyond=" + (3.8 - rules.minDistanceKm()))
     }
 
     // Hyderabad tests
