@@ -88,63 +88,67 @@ fun PreTripScreen(
                 selectedCity = state.selectedCity,
                 onCitySelected = { viewModel.setCity(it) }
             )
+        }
 
-            Box(
-                modifier = Modifier.fillMaxWidth().height(300.dp).padding(vertical = 8.dp)
-            ) {
-                AndroidView(
-                    factory = { ctx ->
-                        val mapView = MapView(ctx)
-                        mapView.apply {
-                            setTileSource(TileSourceFactory.MAPNIK)
-                            setMultiTouchControls(true)
-                            controller.setZoom(12.0)
-                            controller.setCenter(GeoPoint(12.97, 77.59))
+        Box(
+            modifier = Modifier.weight(1f).fillMaxWidth()
+        ) {
+            AndroidView(
+                factory = { ctx ->
+                    val mapView = MapView(ctx)
+                    mapView.apply {
+                        setTileSource(TileSourceFactory.MAPNIK)
+                        setMultiTouchControls(true)
+                        controller.setZoom(12.0)
+                        controller.setCenter(GeoPoint(12.97, 77.59))
 
-                            val eventsOverlay = MapEventsOverlay(object : MapEventsReceiver {
-                                override fun singleTapConfirmedHelper(p: GeoPoint): Boolean = false
-                                override fun longPressHelper(p: GeoPoint): Boolean {
-                                    if (sourceMarker == null) {
-                                        sourceMarker = Marker(mapView).apply {
-                                            position = p
-                                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                                            title = "Source"
-                                            snippet = "${p.latitude}, ${p.longitude}"
-                                            icon = ctx.getDrawable(
-                                                android.R.drawable.ic_menu_mylocation
-                                            )
-                                        }
-                                        mapView.overlays.add(sourceMarker)
-                                        mapView.invalidate()
-                                        viewModel.setSource(p.latitude, p.longitude)
-                                    } else if (destMarker == null) {
-                                        destMarker = Marker(mapView).apply {
-                                            position = p
-                                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                                            title = "Destination"
-                                            snippet = "${p.latitude}, ${p.longitude}"
-                                            icon = ctx.getDrawable(
-                                                android.R.drawable.ic_menu_directions
-                                            )
-                                        }
-                                        mapView.overlays.add(destMarker)
-                                        mapView.invalidate()
-                                        viewModel.setDestination(p.latitude, p.longitude)
+                        val eventsOverlay = MapEventsOverlay(object : MapEventsReceiver {
+                            override fun singleTapConfirmedHelper(p: GeoPoint): Boolean = false
+                            override fun longPressHelper(p: GeoPoint): Boolean {
+                                if (sourceMarker == null) {
+                                    sourceMarker = Marker(mapView).apply {
+                                        position = p
+                                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                                        title = "Source"
+                                        snippet = "${p.latitude}, ${p.longitude}"
+                                        icon = ctx.getDrawable(
+                                            android.R.drawable.ic_menu_mylocation
+                                        )
                                     }
-                                    return true
+                                    mapView.overlays.add(sourceMarker)
+                                    mapView.invalidate()
+                                    viewModel.setSource(p.latitude, p.longitude)
+                                } else if (destMarker == null) {
+                                    destMarker = Marker(mapView).apply {
+                                        position = p
+                                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                                        title = "Destination"
+                                        snippet = "${p.latitude}, ${p.longitude}"
+                                        icon = ctx.getDrawable(
+                                            android.R.drawable.ic_menu_directions
+                                        )
+                                    }
+                                    mapView.overlays.add(destMarker)
+                                    mapView.invalidate()
+                                    viewModel.setDestination(p.latitude, p.longitude)
                                 }
-                            })
-                            mapView.overlays.add(eventsOverlay)
-                        }
-                        mapView
-                    },
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+                                return true
+                            }
+                        })
+                        mapView.overlays.add(eventsOverlay)
+                    }
+                    mapView
+                },
+                modifier = Modifier.fillMaxSize()
+            )
+        }
 
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        ) {
             state.estimatedFare?.let { fare ->
                 Card(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surface
                     )
@@ -176,8 +180,6 @@ fun PreTripScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.weight(1f))
-
             Button(
                 onClick = {
                     state.sourceLat?.let { slat ->
@@ -190,7 +192,7 @@ fun PreTripScreen(
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp).padding(top = 8.dp),
+                modifier = Modifier.fillMaxWidth().height(56.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.secondary
                 ),
