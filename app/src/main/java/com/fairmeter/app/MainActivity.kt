@@ -1,6 +1,7 @@
 package com.fairmeter.app
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
 
     var pendingNavigation: (() -> Unit)? by mutableStateOf(null)
 
+    @SuppressLint("InvalidFragmentVersionForActivityResult")
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
