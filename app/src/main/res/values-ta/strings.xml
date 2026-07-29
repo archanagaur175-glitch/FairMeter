@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ஃபேர்‌மீட்டர்</string>
+    <string name="disclaimer_text">ஃபேர்‌மீட்டர் ஒரு சுயாதீனமான, அதிகாரப்பூர்வமற்ற கருவியாகும். இதற்கு எந்த RTA, மாநில போக்குவரத்துத் துறை, அல்லது இந்திய அரசுடன் எந்த தொடர்பும் இல்லை. அனைத்து கட்டண எண்களும் பொதுவாக அறிவிக்கப்பட்ட கட்டண விகிதங்களை அடிப்படையாகக் கொண்ட மதிப்பீடுகள் மற்றும் அதிகாரப்பூர்வ திருத்தத்திற்கு உட்பட்டவை. இந்த பயன்பாடு கட்டணங்களைச் செயலாக்கவோ அல்லது நடைமுறைப்படுத்தவோ செய்யாது.</string>
+    <string name="disclaimer_title">மறுப்பு</string>
+    <string name="select_city">நகரத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="start_trip">பயணத்தைத் தொடங்கு</string>
+    <string name="stop_trip">பயணத்தை நிறுத்து</string>
+    <string name="estimated_fare">மதிப்பிடப்பட்ட கட்டணம்</string>
+    <string name="base_fare">அடிப்படை கட்டணம்</string>
+    <string name="distance_fare">தூர கட்டணம்</string>
+    <string name="waiting_charges">காத்திருப்பு கட்டணம்</string>
+    <string name="night_surcharge">இரவு கூடுதல் கட்டணம்</string>
+    <string name="total">மொத்தம்</string>
+</resources>

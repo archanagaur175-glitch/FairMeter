@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">फेअरमीटर</string>
+    <string name="disclaimer_text">फेअरमीटर हे एक स्वतंत्र, अनधिकृत साधन आहे ज्याचा कोणत्याही RTA, राज्य वाहतूक विभाग, किंवा भारत सरकारशी संबंध नाही. सर्व भाडे आकडे सार्वजनिकपणे अधिसूचित दरांवर आधारित संदर्भ अंदाज आहेत आणि अधिकृत सुधारणेच्या अधीन आहेत. हे अॅप पेमेंट्स प्रक्रिया करत नाही किंवा भाडे लागू करत नाही.</string>
+    <string name="disclaimer_title">अस्वीकरण</string>
+    <string name="select_city">शहर निवडा</string>
+    <string name="start_trip">प्रवास सुरू करा</string>
+    <string name="stop_trip">प्रवास थांबवा</string>
+    <string name="estimated_fare">अंदाजित भाडे</string>
+    <string name="base_fare">मूळ भाडे</string>
+    <string name="distance_fare">अंतर भाडे</string>
+    <string name="waiting_charges">प्रतीक्षा शुल्क</string>
+    <string name="night_surcharge">रात्री अधिभार</string>
+    <string name="total">एकूण</string>
+</resources>

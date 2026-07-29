@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">फेयरमीटर</string>
+    <string name="disclaimer_text">फेयरमीटर एक स्वतंत्र, अनाधिकारिक उपकरण है जिसका किसी RTA, राज्य परिवहन विभाग, या भारत सरकार से कोई संबंध नहीं है। सभी किराया आंकड़े सार्वजनिक रूप से अधिसूचित टैरिफ पर आधारित संदर्भ अनुमान हैं और आधिकारिक संशोधन के अधीन हैं। यह ऐप भुगतान संसाधित नहीं करता या किराए लागू नहीं करता।</string>
+    <string name="disclaimer_title">अस्वीकरण</string>
+    <string name="select_city">शहर चुनें</string>
+    <string name="start_trip">यात्रा शुरू करें</string>
+    <string name="stop_trip">यात्रा रोकें</string>
+    <string name="estimated_fare">अनुमानित किराया</string>
+    <string name="base_fare">आधार किराया</string>
+    <string name="distance_fare">दूरी किराया</string>
+    <string name="waiting_charges">प्रतीक्षा शुल्क</string>
+    <string name="night_surcharge">रात्रि अधिभार</string>
+    <string name="total">कुल</string>
+</resources>

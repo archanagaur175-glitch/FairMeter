@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಫೇರ್ಮೀಟರ್</string>
+    <string name="disclaimer_text">ಫೇರ್ಮೀಟರ್ ಒಂದು ಸ್ವತಂತ್ರ, ಅನಧಿಕೃತ ಸಾಧನವಾಗಿದೆ ಮತ್ತು ಇದಕ್ಕೆ ಯಾವುದೇ RTA, ರಾಜ್ಯ ಸಾರಿಗೆ ಇಲಾಖೆ, ಅಥವಾ ಭಾರತ ಸರ್ಕಾರದೊಂದಿಗೆ ಸಂಬಂಧವಿಲ್ಲ. ಎಲ್ಲಾ ಬಾಡಿಗೆ ಅಂಕಿಅಂಶಗಳು ಸಾರ್ವಜನಿಕವಾಗಿ ಅಧಿಸೂಚಿತ ಸುಂಕಗಳನ್ನು ಆಧರಿಸಿದ ಉಲ್ಲೇಖ ಅಂದಾಜುಗಳಾಗಿವೆ ಮತ್ತು ಅಧಿಕೃತ ಪರಿಷ್ಕರಣೆಗೆ ಒಳಪಟ್ಟಿವೆ. ಈ ಅಪ್ಲಿಕೇಶನ್ ಪಾವತಿಗಳನ್ನು ಸಂಸ್ಕರಿಸುವುದಿಲ್ಲ ಅಥವಾ ಬಾಡಿಗೆಗಳನ್ನು ಜಾರಿಗೊಳಿಸುವುದಿಲ್ಲ.</string>
+    <string name="disclaimer_title">ಹಕ್ಕುನಿರಾಕರಣೆ</string>
+    <string name="select_city">ನಗರ ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="start_trip">ಪ್ರಯಾಣ ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="stop_trip">ಪ್ರಯಾಣ ನಿಲ್ಲಿಸಿ</string>
+    <string name="estimated_fare">ಅಂದಾಜು ಬಾಡಿಗೆ</string>
+    <string name="base_fare">ಮೂಲ ಬಾಡಿಗೆ</string>
+    <string name="distance_fare">ದೂರ ಬಾಡಿಗೆ</string>
+    <string name="waiting_charges">ಕಾಯುವ ಶುಲ್ಕ</string>
+    <string name="night_surcharge">ರಾತ್ರಿ ಹೆಚ್ಚುವರಿ ಶುಲ್ಕ</string>
+    <string name="total">ಒಟ್ಟು</string>
+</resources>

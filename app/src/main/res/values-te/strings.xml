@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ఫేర్‌మీటర్</string>
+    <string name="disclaimer_text">ఫేర్‌మీటర్ ఒక స్వతంత్ర, అనధికారిక సాధనం. దీనికి ఏ RTA, రాష్ట్ర రవాణా శాఖ, లేదా భారత ప్రభుత్వంతో ఎలాంటి అనుబంధం లేదు. అన్ని ఛార్జీల అంకెలు బహిరంగంగా నోటిఫై చేయబడిన టారిఫ్ల ఆధారంగా రిఫరెన్స్ అంచనాలు మరియు అధికారిక సవరణకు లోబడి ఉంటాయి. ఈ యాప్ చెల్లింపులను ప్రాసెస్ చేయదు లేదా ఛార్జీలను అమలు చేయదు.</string>
+    <string name="disclaimer_title">నిరాకరణ</string>
+    <string name="select_city">నగరాన్ని ఎంచుకోండి</string>
+    <string name="start_trip">ప్రయాణం ప్రారంభించండి</string>
+    <string name="stop_trip">ప్రయాణం ఆపండి</string>
+    <string name="estimated_fare">అంచనా ఛార్జీ</string>
+    <string name="base_fare">బేస్ ఛార్జీ</string>
+    <string name="distance_fare">దూరం ఛార్జీ</string>
+    <string name="waiting_charges">వెయిటింగ్ ఛార్జీలు</string>
+    <string name="night_surcharge">రాత్రి సర్‌ఛార్జ్</string>
+    <string name="total">మొత్తం</string>
+</resources>
