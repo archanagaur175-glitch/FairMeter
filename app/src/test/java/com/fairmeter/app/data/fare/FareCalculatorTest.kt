@@ -208,10 +208,10 @@ class FareCalculatorTest {
         )
         // 3.8 - 1.8 = 2.0 km * 12 = 24
         assertEquals(25, result.baseFare)
-        assertEquals(0, result.waitingFare)
-        assertEquals(0, result.nightSurcharge)
-        assertEquals(49, result.total)
-        assertEquals(24, result.distanceFare)
+        assertEquals("waiting", 0, result.waitingFare)
+        assertEquals("night", 0, result.nightSurcharge)
+        assertEquals("total", 49, result.total)
+        assertEquals("dist", 24, result.distanceFare)
     }
 
     // Hyderabad tests
