@@ -207,10 +207,11 @@ class FareCalculatorTest {
             city = com.fairmeter.app.data.model.City.CHENNAI
         )
         // 3.8 - 1.8 = 2.0 km * 12 = 24
-        System.err.println("CHENNAI_DBG baseFare=" + result.baseFare + " distanceFare=" + result.distanceFare + " waitingFare=" + result.waitingFare + " nightSurcharge=" + result.nightSurcharge + " total=" + result.total)
         assertEquals(25, result.baseFare)
         assertEquals(0, result.waitingFare)
         assertEquals(0, result.nightSurcharge)
+        if (result.total != 49) throw RuntimeException("DEBUG total=" + result.total + " dist=" + result.distanceFare + " base=" + result.baseFare)
+        if (result.distanceFare != 24) throw RuntimeException("DEBUG2 dist=" + result.distanceFare)
         assertEquals(49, result.total)
         assertEquals(24, result.distanceFare)
     }
