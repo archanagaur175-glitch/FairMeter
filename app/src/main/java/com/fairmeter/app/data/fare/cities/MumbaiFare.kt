@@ -2,8 +2,9 @@ package com.fairmeter.app.data.fare.cities
 
 import com.fairmeter.app.data.fare.FareRuleSet
 import com.fairmeter.app.data.model.City
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalTime
-import kotlin.math.roundToInt
 
 /**
  * Mumbai auto-rickshaw (CNG) tariff.
@@ -41,22 +42,14 @@ object MumbaiFare : FareRuleSet {
     }
 
     override fun waitingFare(seconds: Int): Int {
-        val minutes = seconds / 60.0
-        val raw = 0.10 * PER_KM_BASE * minutes
-        return raw.roundToNearestRupee()
+        val perMinuteRate = BigDecimal("0.10").multiply(BigDecimal(PER_KM_BASE.toString()))
+        val minutes = BigDecimal(seconds).divide(BigDecimal(60), 10, RoundingMode.HALF_UP)
+        return perMinuteRate.multiply(minutes).setScale(0, RoundingMode.HALF_UP).toInt()
     }
 }
 
-/**
- * Mumbai rounding rule: ≤49 paisa drops, ≥50 paisa rounds up to next rupee.
- */
-fun Double.roundToNearestRupee(): Int {
-    val rounded = this.roundToInt()
-    val diff = this - rounded
-    return when {
-        this < 0 -> rounded
-        diff >= 0.5 -> rounded + 1
-        diff <= -0.5 -> rounded - 1
-        else -> rounded
-    }
-}
+fun BigDecimal.roundToNearestRupee(): Int =
+    setScale(0, RoundingMode.HALF_UP).toInt()
+
+fun Double.roundToNearestRupee(): Int =
+    BigDecimal(this.toString()).roundToNearestRupee()

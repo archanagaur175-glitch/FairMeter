@@ -161,8 +161,8 @@ class FareCalculatorTest {
             currentTime = LocalTime.of(14, 0),
             city = com.fairmeter.app.data.model.City.DELHI
         )
-        // 5.0 - 1.5 = 3.5 km * 11 = 38.5 -> 38
-        assertEquals(38, result.distanceFare)
+        // 5.0 - 1.5 = 3.5 km * 11 = 38.5 -> 39 (half-up)
+        assertEquals(39, result.distanceFare)
     }
 
     @Test
@@ -206,12 +206,11 @@ class FareCalculatorTest {
             currentTime = LocalTime.of(14, 0),
             city = com.fairmeter.app.data.model.City.CHENNAI
         )
-        // 3.8 - 1.8 = 2.0 km * 12 = 24
+        // BigDecimal arithmetic: 3.8 - 1.8 = 2.0 exactly, 2.0 * 12 = 24
         assertEquals(25, result.baseFare)
+        assertEquals(24, result.distanceFare)
         assertEquals(0, result.waitingFare)
         assertEquals(0, result.nightSurcharge)
-        val rules = FareCalculator.getRules(com.fairmeter.app.data.model.City.CHENNAI)
-        throw RuntimeException("DEBUG perKm=" + rules.perKmRate() + " minDist=" + rules.minDistanceKm() + " beyond=" + (3.8 - rules.minDistanceKm()))
     }
 
     // Hyderabad tests
@@ -329,5 +328,20 @@ class FareCalculatorTest {
     fun hyderabad_nightBand_11pmto5am() {
         assertEquals(true, HyderabadFare.isNight(LocalTime.of(23, 0)))
         assertEquals(false, HyderabadFare.isNight(LocalTime.of(5, 0)))
+    }
+
+    // Regression: BigDecimal arithmetic prevents Double subtraction epsilon (3.8-1.8 != 2.0)
+    @Test
+    fun chennai_threePointEightKm_exactDistanceFare() {
+        val result = FareCalculator.estimateFare(
+            distanceKm = 3.8,
+            waitingSeconds = 0,
+            currentTime = LocalTime.of(14, 0),
+            city = com.fairmeter.app.data.model.City.CHENNAI
+        )
+        assertEquals(25, result.baseFare)
+        assertEquals(24, result.distanceFare)
+        assertEquals(0, result.waitingFare)
+        assertEquals(0, result.nightSurcharge)
     }
 }
