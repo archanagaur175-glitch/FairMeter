@@ -92,7 +92,8 @@ fun PreTripScreen(
             ) {
                 AndroidView(
                     factory = { ctx ->
-                        MapView(ctx).apply {
+                        val mapView = MapView(ctx)
+                        mapView.apply {
                             setTileSource(TileSourceFactory.MAPNIK)
                             setMultiTouchControls(true)
                             controller.setZoom(12.0)
@@ -102,7 +103,7 @@ fun PreTripScreen(
                                 override fun singleTapConfirmedHelper(p: GeoPoint): Boolean = false
                                 override fun longPressHelper(p: GeoPoint): Boolean {
                                     if (sourceMarker == null) {
-                                        sourceMarker = Marker(this).apply {
+                                        sourceMarker = Marker(mapView).apply {
                                             position = p
                                             setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                                             title = "Source"
@@ -111,10 +112,11 @@ fun PreTripScreen(
                                                 android.R.drawable.ic_menu_mylocation
                                             )
                                         }
-                                        overlays.add(sourceMarker)
+                                        mapView.overlays.add(sourceMarker)
+                                        mapView.invalidate()
                                         viewModel.setSource(p.latitude, p.longitude)
                                     } else if (destMarker == null) {
-                                        destMarker = Marker(this).apply {
+                                        destMarker = Marker(mapView).apply {
                                             position = p
                                             setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                                             title = "Destination"
@@ -123,14 +125,16 @@ fun PreTripScreen(
                                                 android.R.drawable.ic_menu_directions
                                             )
                                         }
-                                        overlays.add(destMarker)
+                                        mapView.overlays.add(destMarker)
+                                        mapView.invalidate()
                                         viewModel.setDestination(p.latitude, p.longitude)
                                     }
                                     return true
                                 }
                             })
-                            overlays.add(eventsOverlay)
+                            mapView.overlays.add(eventsOverlay)
                         }
+                        mapView
                     },
                     modifier = Modifier.fillMaxSize()
                 )
