@@ -112,12 +112,12 @@ class FareCalculatorTest {
 
     @Test
     fun mumbai_rounding_49paisaDrops() {
-        assertEquals(41, roundToNearestRupee(41.13))
+        assertEquals(41, 41.13.roundToNearestRupee())
     }
 
     @Test
     fun mumbai_rounding_50paisaRoundsUp() {
-        assertEquals(62, roundToNearestRupee(61.70))
+        assertEquals(62, 61.70.roundToNearestRupee())
     }
 
     @Test
