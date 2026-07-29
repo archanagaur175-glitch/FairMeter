@@ -65,11 +65,12 @@ fun PreTripScreen(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { perms ->
         if (perms[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
-            state.sourceLat?.let { slat ->
-                state.sourceLng?.let { slng ->
-                    state.destLat?.let { dlat ->
-                        state.destLng?.let { dlng ->
-                            onStartTrip(state.selectedCity, slat, slng, dlat, dlng)
+            val s = viewModel.uiState.value
+            s.sourceLat?.let { slat ->
+                s.sourceLng?.let { slng ->
+                    s.destLat?.let { dlat ->
+                        s.destLng?.let { dlng ->
+                            onStartTrip(s.selectedCity, slat, slng, dlat, dlng)
                         }
                     }
                 }
@@ -206,23 +207,24 @@ fun PreTripScreen(
                     val fineGranted = ContextCompat.checkSelfPermission(
                         context, Manifest.permission.ACCESS_FINE_LOCATION
                     ) == PackageManager.PERMISSION_GRANTED
-                    if (!fineGranted) {
+                    if (fineGranted) {
+                        val s = viewModel.uiState.value
+                        s.sourceLat?.let { slat ->
+                            s.sourceLng?.let { slng ->
+                                s.destLat?.let { dlat ->
+                                    s.destLng?.let { dlng ->
+                                        onStartTrip(s.selectedCity, slat, slng, dlat, dlng)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
                         locationPermissionLauncher.launch(
                             arrayOf(
                                 Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
                             )
                         )
-                        return@Button
-                    }
-                    state.sourceLat?.let { slat ->
-                        state.sourceLng?.let { slng ->
-                            state.destLat?.let { dlat ->
-                                state.destLng?.let { dlng ->
-                                    onStartTrip(state.selectedCity, slat, slng, dlat, dlng)
-                                }
-                            }
-                        }
                     }
                 },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
