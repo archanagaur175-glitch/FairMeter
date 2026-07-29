@@ -53,7 +53,7 @@ object FareCalculator {
             if (city == City.MUMBAI) {
                 distanceFareRaw = ((distance * effectivePerKm)).roundToNearestRupee()
             } else {
-                distanceFareRaw = (distance * effectivePerKm).roundToInt()
+                distanceFareRaw = (distance * effectivePerKm).toInt()
             }
         }
 
@@ -63,7 +63,7 @@ object FareCalculator {
         val nightSurcharge: Int
         if (isNightNow && city != City.HYDERABAD) {
             val multiplier = rules.nightMultiplier()
-            nightSurcharge = (incrementTotal * (multiplier - 1.0)).roundToInt()
+            nightSurcharge = (incrementTotal * (multiplier - 1.0)).toInt()
         } else {
             nightSurcharge = 0
         }
@@ -123,7 +123,7 @@ object FareCalculator {
         if (city == City.MUMBAI) {
             rawDistanceFare = (distanceBeyondMin * effectivePerKm).roundToNearestRupee()
         } else {
-            rawDistanceFare = (distanceBeyondMin * effectivePerKm).roundToInt()
+            rawDistanceFare = (distanceBeyondMin * effectivePerKm).toInt()
         }
 
         val waitingFare = rules.waitingFare(waitingSeconds)
@@ -131,7 +131,7 @@ object FareCalculator {
 
         val nightSurcharge: Int
         if (isNightNow && city != City.HYDERABAD) {
-            nightSurcharge = (subtotal * (rules.nightMultiplier() - 1.0)).roundToInt()
+            nightSurcharge = (subtotal * (rules.nightMultiplier() - 1.0)).toInt()
         } else {
             nightSurcharge = 0
         }

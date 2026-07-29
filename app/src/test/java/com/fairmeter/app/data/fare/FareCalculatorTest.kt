@@ -80,8 +80,6 @@ class FareCalculatorTest {
             currentTime = LocalTime.of(22, 30),
             city = com.fairmeter.app.data.model.City.BENGALURU
         )
-        assertEquals(3, nightIncrement.nightSurcharge) // 9 * 0.5 = 4.5, night = 0.5 * 4.5... let me recalculate
-        // distanceFare = 0.5 * 18 = 9, incrementTotal = 9, nightSurcharge = 9 * 0.5 = 4.5 -> 4
         assertEquals(4, nightIncrement.nightSurcharge)
     }
 
