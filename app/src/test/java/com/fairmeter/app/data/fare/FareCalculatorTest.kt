@@ -207,6 +207,7 @@ class FareCalculatorTest {
             city = com.fairmeter.app.data.model.City.CHENNAI
         )
         // 3.8 - 1.8 = 2.0 km * 12 = 24
+        System.out.println("CHENNAI distanceFare actual: " + result.distanceFare)
         assertEquals(24, result.distanceFare)
     }
 
