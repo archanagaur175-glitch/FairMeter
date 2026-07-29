@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
     <string name="app_name">FairMeter</string>
     <string name="disclaimer_text">FairMeter is an independent, unofficial tool with no affiliation to any RTA, State Transport Department, or Government of India. All fare figures are reference estimates based on publicly notified tariffs and are subject to official revision. This app does not process payments or enforce fares.</string>
     <string name="disclaimer_title">Disclaimer</string>

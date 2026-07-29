@@ -63,7 +63,7 @@ object FareCalculator {
         val nightSurcharge: Int
         if (isNightNow && city != City.HYDERABAD) {
             val multiplier = rules.nightMultiplier()
-            nightSurcharge = (incrementTotal * (multiplier - 1.0)).toInt()
+            nightSurcharge = (incrementTotal * (multiplier - 1.0)).roundToInt()
         } else {
             nightSurcharge = 0
         }
@@ -131,7 +131,7 @@ object FareCalculator {
 
         val nightSurcharge: Int
         if (isNightNow && city != City.HYDERABAD) {
-            nightSurcharge = (subtotal * (rules.nightMultiplier() - 1.0)).toInt()
+            nightSurcharge = (subtotal * (rules.nightMultiplier() - 1.0)).roundToInt()
         } else {
             nightSurcharge = 0
         }

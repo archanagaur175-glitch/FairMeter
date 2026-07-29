@@ -80,7 +80,7 @@ class FareCalculatorTest {
             currentTime = LocalTime.of(22, 30),
             city = com.fairmeter.app.data.model.City.BENGALURU
         )
-        assertEquals(4, nightIncrement.nightSurcharge)
+        assertEquals(5, nightIncrement.nightSurcharge)
     }
 
     // Mumbai tests
@@ -182,7 +182,7 @@ class FareCalculatorTest {
             currentTime = LocalTime.of(23, 30),
             city = com.fairmeter.app.data.model.City.DELHI
         )
-        assertEquals(7, result.nightSurcharge) // 30 * 0.25 = 7.5 -> 7
+        assertEquals(8, result.nightSurcharge) // 30 * 0.25 = 7.5 -> 8 (half-up)
     }
 
     // Chennai tests
