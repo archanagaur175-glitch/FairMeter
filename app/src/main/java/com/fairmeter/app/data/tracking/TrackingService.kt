@@ -1,5 +1,6 @@
 package com.fairmeter.app.data.tracking
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -78,6 +79,7 @@ class TrackingService : Service() {
         return START_STICKY
     }
 
+    @SuppressLint("MissingPermission")
     private fun startLocationUpdates(city: City) {
         val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
             .setMinUpdateDistanceMeters(5f)
