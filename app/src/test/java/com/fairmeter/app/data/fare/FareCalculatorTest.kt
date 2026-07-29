@@ -207,7 +207,7 @@ class FareCalculatorTest {
             city = com.fairmeter.app.data.model.City.CHENNAI
         )
         // 3.8 - 1.8 = 2.0 km * 12 = 24
-        assertEquals("distanceFare", 24, result.distanceFare)
+        throw RuntimeException("DEBUG: distanceFare=" + result.distanceFare + " baseFare=" + result.baseFare + " waitingFare=" + result.waitingFare + " nightSurcharge=" + result.nightSurcharge + " total=" + result.total)
     }
 
     // Hyderabad tests
