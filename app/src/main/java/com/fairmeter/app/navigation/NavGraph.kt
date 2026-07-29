@@ -33,7 +33,8 @@ object Routes {
 @Composable
 fun FairMeterNavHost(
     navController: NavHostController,
-    app: FairMeterApp
+    app: FairMeterApp,
+    onRequestLocationPermission: (onGranted: () -> Unit) -> Unit = {}
 ) {
     NavHost(
         navController = navController,
@@ -56,7 +57,9 @@ fun FairMeterNavHost(
             PreTripScreen(
                 viewModel = viewModel,
                 onStartTrip = { city, slat, slng, dlat, dlng ->
-                    navController.navigate("meter/${city.name}")
+                    onRequestLocationPermission {
+                        navController.navigate("meter/${city.name}")
+                    }
                 },
                 onBack = { navController.popBackStack() }
             )
